@@ -1,12 +1,12 @@
 import css from "./SearchBar.module.css";
 import { useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-// import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
 
-  const notify = () => {};
+  const notify = () => toast.error("Please enter the text for image search");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,6 +36,7 @@ const SearchBar = ({ onSubmit }) => {
               onChange={(event) => setQuery(event.target.value)}
             />
           </div>
+          <Toaster position="top-left" />
         </form>
       </header>
     </>

@@ -1,7 +1,13 @@
 //import css from "./ImageCard.module.css";
 
 const ImageCard = () => {
-  return <></>;
+  return (
+    <>
+      <div>
+        <img src="" alt="" />
+      </div>
+    </>
+  );
 };
 
 export default ImageCard;

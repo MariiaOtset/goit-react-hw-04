@@ -1,7 +1,6 @@
 // import { useState, useEffect } from 'react';
 // import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-// import ImageCard from "./components/ImageCard/ImageCard";
-// import ImageGallery from "./components/ImageCard/ImageCard";
+import ImageGallery from "./components/ImageCard/ImageCard";
 // import ImageModal from "./components/ImageModal/ImageModal";
 // import Loader from "./components/Loader/Loader";
 // import LoadMoreBtn  from "./components/LoadMoreBtn/LoadMoreBtn";
@@ -15,6 +14,7 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
+      <ImageGallery />
     </>
   );
 }
