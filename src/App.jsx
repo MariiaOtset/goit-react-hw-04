@@ -35,7 +35,7 @@ function App() {
   };
 
   const handleLoadMore = () => {
-    setCurrentPage((prev = prev + 1));
+    setCurrentPage((prev) => prev + 1);
   };
 
   const handleModalClose = () => setModalInfo(INITIAL_MODAL_INFO);
@@ -55,44 +55,49 @@ function App() {
         setGalleryImages((prev) => [...prev, ...data.results]);
       } catch (error) {
         setError(error);
+        throw new Error(error.message);
+      } finally {
+        setIsLoading(false);
       }
     }
-  });
+    getImages();
+  }, [searchQuery, currentPage]);
+
+  useEffect(() => {
+    if (currentPage === 1) return;
+
+    appRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [galleryImages, currentPage]);
 
   return (
-    <>
-      <div ref={appRef}>
-        <SearchBar onSearch={handleSearch} />
+    <div ref={appRef}>
+      <SearchBar onSearch={handleSearch} />
 
-        {isLoading && galleryImages.length === 0 && <Loader />}
+      {isLoading && galleryImages.length === 0 && <Loader />}
 
-        {galleryImages.length > 0 && (
-          <>
-            <ImageGallery
-              items={galleryImages}
-              onImageClick={handleImageClick}
-            />
+      {galleryImages.length > 0 && (
+        <>
+          <ImageGallery items={galleryImages} onImageClick={handleImageClick} />
 
-            {isLoading && <Loader />}
-            {error && <ErrorMessage message={error.message} />}
-            {!error && <LoadMoreBtn onClick={handleLoadMore} />}
-          </>
-        )}
+          {isLoading && <Loader />}
+          {error && <ErrorMessage message={error.message} />}
+          {!error && <LoadMoreBtn onClick={handleLoadMore} />}
+        </>
+      )}
 
-        {error && galleryImages.length === 0 && (
-          <ErrorMessage message={error.message} />
-        )}
+      {error && galleryImages.length === 0 && (
+        <ErrorMessage message={error.message} />
+      )}
 
-        {modalInfo.isOpen && (
-          <ImageModal
-            isOpen={modalInfo.isOpen}
-            url={modalInfo.url}
-            description={modalInfo.description}
-            onClose={handleModalClose}
-          />
-        )}
-      </div>
-    </>
+      {modalInfo.isOpen && (
+        <ImageModal
+          isOpen={modalInfo.isOpen}
+          url={modalInfo.url}
+          description={modalInfo.description}
+          onClose={handleModalClose}
+        />
+      )}
+    </div>
   );
 }
 
