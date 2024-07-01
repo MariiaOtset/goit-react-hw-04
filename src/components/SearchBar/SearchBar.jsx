@@ -1,22 +1,21 @@
 import css from "./SearchBar.module.css";
-import { useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
 
-const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState("");
-
+const SearchBar = ({ onSearch }) => {
   const notify = () => toast.error("Please enter the text for image search");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (query === "") {
+    const searchQuery = event.currentTarget.elements.search.value.trim();
+
+    if (searchQuery === "") {
       notify();
       return;
     }
-    onSubmit(query.trim());
-    setQuery("");
+    onSearch(searchQuery);
   };
+
   return (
     <>
       <header className={css.searchWrapper}>
@@ -29,11 +28,9 @@ const SearchBar = ({ onSubmit }) => {
               className={css.searchInput}
               type="text"
               name="search"
-              value={query}
               autoComplete="off"
               autoFocus
               placeholder="Search images and photos"
-              onChange={(event) => setQuery(event.target.value)}
             />
           </div>
           <Toaster position="top-left" />

@@ -1,10 +1,10 @@
 //import css from "./ImageCard.module.css";
 
-const ImageCard = () => {
+const ImageCard = (url, description, onImageClick) => {
   return (
     <>
       <div>
-        <img src="" alt="" />
+        <img src={url} alt={description} onClick={onImageClick} />
       </div>
     </>
   );
