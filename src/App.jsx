@@ -49,6 +49,8 @@ function App() {
 
     async function getImages() {
       setIsLoading(true);
+      setError(null);
+
       try {
         const data = await fetchImages(searchQuery, currentPage);
         if (data.results.length === 0) throw new Error("No results found");
