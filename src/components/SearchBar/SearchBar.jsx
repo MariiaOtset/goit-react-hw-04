@@ -3,7 +3,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSearch }) => {
-  const notify = () => toast.error("Please enter the text for image search");
+  const notify = () => toast.error("Please enter the text for images search");
 
   const handleSubmit = (event) => {
     event.preventDefault();
