@@ -8,7 +8,7 @@ const options = {
 };
 
 export const fetchImages = async (query, page) => {
-  const searchParams = new URLSearchParams({ query, page, per_page: 15 });
+  const searchParams = new URLSearchParams({ query, page, per_page: 20 });
 
   return (await axios(`${BASE_URL}?${searchParams}`, options)).data;
 };
